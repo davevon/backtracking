@@ -72,6 +72,8 @@ def main():
     selected_cell = None
     solved = False
     solved_timer = None
+    taskbar_congrats = False  # Flag for displaying congratulation message in taskbar
+    
     
     while running:
         for event in pygame.event.get():
@@ -120,7 +122,11 @@ def main():
         
         pygame.display.flip()
         clock.tick(60)
+        if taskbar_congrats:
+            pygame.display.set_caption("Sudoku Solver - Congratulations!")
 
+        else:
+            pygame.display.set_caption("Sudoku Solver")
     pygame.quit()
     sys.exit()
 
