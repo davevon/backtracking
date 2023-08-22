@@ -1,5 +1,8 @@
 import pygame
 import sys
+import tkinter as tk
+from tkinter import messagebox
+from datetime import datetime
 
 # Initialize pygame
 pygame.init()
@@ -66,6 +69,7 @@ def solve_sudoku():
 
 def main():
     global grid  # Declare grid as global
+    global taskbar_congrats
 
     clock = pygame.time.Clock()
     running = True
@@ -95,6 +99,7 @@ def main():
         if is_solved() and not solved:
             solved = True
             solved_timer = pygame.time.get_ticks()
+            start_time = datetime.now()
         
         screen.fill(WHITE)
         draw_grid()
@@ -117,6 +122,11 @@ def main():
                  #   
                 ]
                 solved_timer = None
+                if start_time:
+                    end_time = datetime.now()
+                    time_difference = end_time - start_time
+                    popup_window(time_difference.total_seconds())
+                start_time = None
         
         if selected_cell is not None:
             pygame.draw.rect(screen, GRAY, (selected_cell[1] * WIDTH // 9, selected_cell[0] * HEIGHT // 9, WIDTH // 9, HEIGHT // 9), 3)
@@ -130,6 +140,12 @@ def main():
             pygame.display.set_caption("Sudoku Solver")
     pygame.quit()
     sys.exit()
+
+def popup_window(time_elapsed):
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showinfo("Time Elapsed", f"Time Elapsed: {time_elapsed:.2f} seconds")
+    root.destroy()    
 
 if __name__ == "__main__":
     main()

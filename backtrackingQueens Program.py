@@ -79,3 +79,26 @@ solve_n_queens_util(board, 0, {})
 # Example usage
 n = 5  # Change this to the desired board size
 solve_n_queens_visualized(n)
+
+
+
+
+############################## Discussion #############################
+
+""" Time Complexity Analysis:
+
+The time complexity of the N-Queens backtracking algorithm is typically upper-bounded by O(n!), where 'n' is the number of rows/columns in the chessboard. However, due to pruning and early stopping, the effective number of recursive calls is much less than n! in practice.
+
+Optimizations:
+
+Early Exit: If the algorithm finds a solution, it can immediately return, as only one solution is required.
+
+Column Check Optimization: The 'is_safe' function can be optimized by maintaining an array of boolean values for each column, left diagonal, and right diagonal to check for conflicts. This can reduce the time complexity of conflict checking.
+
+Symmetry Reduction: Since the N-Queens problem exhibits rotational and reflective symmetries, you can reduce the search space by considering only a subset of solutions and then deriving the rest using symmetry transformations.
+
+Bitwise Operations: Using bitwise operations can improve memory efficiency and speed up the computation of valid positions for queens.
+
+Parallelization: The backtracking process can be parallelized to explore different branches simultaneously, improving overall efficiency.
+
+Remember that while these optimizations can significantly improve the performance of the algorithm, the N-Queens problem's worst-case time complexity remains exponential due to its inherent nature. """
